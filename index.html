@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>História — Sumário das Aulas</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f4ecd8;
+    --bg-soft: #fbf6e9;
+    --bg-hover: #f7ecd1;
+    --border: #e2cfa8;
+    --border-strong: #c9a96a;
+    --gold: #b8860b;
+    --gold-deep: #8a6508;
+    --ink: #2e2516;
+    --ink-soft: #6b5836;
+    --ink-mute: #9a8358;
+    --shadow-sm: 0 1px 2px rgba(107, 68, 35, 0.05);
+    --shadow-md: 0 4px 16px rgba(107, 68, 35, 0.08);
+    --shadow-lg: 0 12px 32px rgba(107, 68, 35, 0.14);
+    --radius: 16px;
+    --radius-lg: 22px;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: clamp(28px, 6vw, 56px) 20px;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(184, 134, 11, 0.10) 0%, transparent 55%),
+      radial-gradient(circle at 85% 90%, rgba(139, 90, 43, 0.08) 0%, transparent 55%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    margin-bottom: 44px;
+    opacity: 0;
+    animation: fadeIn 0.9s var(--ease) forwards;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    background: rgba(184, 134, 11, 0.08);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  header h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(36px, 7vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 14px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  header h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-deep);
+  }
+
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin: 22px auto 16px;
+  }
+
+  header p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: 0.3px;
+  }
+
+  /* LISTA DE AULAS */
+  .aulas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .aula-card {
+    display: flex;
+    align-items: center;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s var(--ease),
+                background 0.25s var(--ease),
+                border-color 0.25s var(--ease),
+                box-shadow 0.25s var(--ease);
+    opacity: 0;
+    animation: fadeUp 0.6s var(--ease) forwards;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .aula-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(184, 134, 11, 0.04) 100%);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    pointer-events: none;
+  }
+
+  .aula-card:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .aula-card:hover::before { opacity: 1; }
+
+  .aula-card:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .aula-numero {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
+    color: var(--gold);
+    min-width: 52px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+    transition: color 0.25s var(--ease);
+  }
+
+  .aula-card:hover .aula-numero { color: var(--gold-deep); }
+
+  .aula-conteudo {
+    flex: 1;
+    padding: 0 14px;
+  }
+
+  .aula-titulo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15.5px;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 3px;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  .aula-subtitulo {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-weight: 400;
+    letter-spacing: 0.1px;
+  }
+
+  .aula-seta {
+    color: var(--gold);
+    font-size: 22px;
+    font-family: 'Fraunces', serif;
+    transition: transform 0.3s var(--ease);
+    line-height: 1;
+  }
+
+  .aula-card:hover .aula-seta {
+    transform: translateX(6px);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 1s var(--ease) 1.2s forwards;
+  }
+
+  footer span {
+    display: inline-block;
+    padding: 0 8px;
+  }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Delays escalonados */
+  .aula-card:nth-child(1)  { animation-delay: 0.10s; }
+  .aula-card:nth-child(2)  { animation-delay: 0.15s; }
+  .aula-card:nth-child(3)  { animation-delay: 0.20s; }
+  .aula-card:nth-child(4)  { animation-delay: 0.25s; }
+  .aula-card:nth-child(5)  { animation-delay: 0.30s; }
+  .aula-card:nth-child(6)  { animation-delay: 0.35s; }
+  .aula-card:nth-child(7)  { animation-delay: 0.40s; }
+  .aula-card:nth-child(8)  { animation-delay: 0.45s; }
+  .aula-card:nth-child(9)  { animation-delay: 0.50s; }
+  .aula-card:nth-child(10) { animation-delay: 0.55s; }
+  .aula-card:nth-child(11) { animation-delay: 0.60s; }
+  .aula-card:nth-child(12) { animation-delay: 0.65s; }
+  .aula-card:nth-child(13) { animation-delay: 0.70s; }
+
+  /* FOCO ACESSÍVEL */
+  .aula-card:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 480px) {
+    .aula-card { padding: 16px 18px; border-radius: 14px; }
+    .aula-numero { font-size: 28px; min-width: 44px; }
+    .aula-titulo { font-size: 14.5px; }
+    .aula-subtitulo { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <span class="eyebrow">Curso de História</span>
+    <h1>Sumário <em>das aulas</em></h1>
+    <div class="divider"></div>
+    <p>Selecione um módulo para começar</p>
+  </header>
+
+  <nav class="aulas-list">
+
+    <a href="https://gustapauli.github.io/apostila" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">01</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Por que estudar isso muda sua vida</div>
+        <div class="aula-subtitulo">Conceitos e fontes históricas</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/apostila" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">02</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Pré-História</div>
+        <div class="aula-subtitulo">Das origens à sedentarização</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/apostila" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">03</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Antiguidade Oriental</div>
+        <div class="aula-subtitulo">Egito e Mesopotâmia</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula4" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">04</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Grécia Antiga</div>
+        <div class="aula-subtitulo">Pólis, democracia e cultura</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula5" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">05</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Roma Antiga</div>
+        <div class="aula-subtitulo">República e Império</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula6" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">06</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Idade Média</div>
+        <div class="aula-subtitulo">Feudalismo e Igreja</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula7" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">07</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Renascimento</div>
+        <div class="aula-subtitulo">Humanismo e ciência moderna</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula8" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">08</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Grandes Navegações</div>
+        <div class="aula-subtitulo">Expansão marítima europeia</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula9" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">09</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Absolutismo e Mercantilismo</div>
+        <div class="aula-subtitulo">O Estado Moderno</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula10" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">10</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Iluminismo</div>
+        <div class="aula-subtitulo">Razão e liberdade</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula11" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">11</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Revolução Francesa</div>
+        <div class="aula-subtitulo">Liberdade, Igualdade, Fraternidade</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula12" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">12</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Revolução Americana</div>
+        <div class="aula-subtitulo">Independência dos EUA</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+    <a href="https://gustapauli.github.io/aula13" class="aula-card" target="_blank" rel="noopener">
+      <span class="aula-numero">13</span>
+      <div class="aula-conteudo">
+        <div class="aula-titulo">Revolução Industrial</div>
+        <div class="aula-subtitulo">Capitalismo e sociedade urbana</div>
+      </div>
+      <span class="aula-seta">›</span>
+    </a>
+
+  </nav>
+
+  <footer>
+    <span>Curso de História</span>
+  </footer>
+
+</div>
+</body>
+</html>
