@@ -1,404 +1,510 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>História — Sumário das Aulas</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejamento — Entender o Mundo</title>
 <style>
   :root {
-    --bg: #f4ecd8;
-    --bg-soft: #fbf6e9;
-    --bg-hover: #f7ecd1;
-    --border: #e2cfa8;
-    --border-strong: #c9a96a;
-    --gold: #b8860b;
-    --gold-deep: #8a6508;
-    --ink: #2e2516;
-    --ink-soft: #6b5836;
-    --ink-mute: #9a8358;
-    --shadow-sm: 0 1px 2px rgba(107, 68, 35, 0.05);
-    --shadow-md: 0 4px 16px rgba(107, 68, 35, 0.08);
-    --shadow-lg: 0 12px 32px rgba(107, 68, 35, 0.14);
-    --radius: 16px;
-    --radius-lg: 22px;
-    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --bg: #F4EFE6;
+    --bg-deep: #1A1814;
+    --ink: #1A1814;
+    --ink-soft: #4A4640;
+    --paper: #FBF7EF;
+    --accent: #B8862F;
+    --accent-soft: #E8C77A;
+    --line: rgba(26,24,20,0.12);
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'DM Sans', system-ui, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    min-height: 100vh;
-    padding: clamp(28px, 6vw, 56px) 20px;
-    background-image:
-      radial-gradient(circle at 15% 10%, rgba(184, 134, 11, 0.10) 0%, transparent 55%),
-      radial-gradient(circle at 85% 90%, rgba(139, 90, 43, 0.08) 0%, transparent 55%);
-    background-attachment: fixed;
-    -webkit-font-smoothing: antialiased;
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    padding: 48px 24px 80px;
   }
 
   .container {
-    max-width: 520px;
+    max-width: 880px;
     margin: 0 auto;
   }
 
-  /* HEADER */
-  header {
+  /* ===== HEADER ===== */
+  .header {
     text-align: center;
-    margin-bottom: 44px;
-    opacity: 0;
-    animation: fadeIn 0.9s var(--ease) forwards;
+    padding: 40px 0 56px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 48px;
   }
-
   .eyebrow {
-    display: inline-block;
     font-size: 11px;
-    letter-spacing: 3px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gold-deep);
-    background: rgba(184, 134, 11, 0.08);
-    padding: 6px 14px;
-    border-radius: 999px;
+    color: var(--accent);
     margin-bottom: 18px;
-    font-weight: 500;
   }
-
-  header h1 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: clamp(36px, 7vw, 48px);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    color: var(--ink);
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(34px, 5vw, 52px);
     line-height: 1.05;
+    letter-spacing: -0.02em;
     margin-bottom: 14px;
-    font-variation-settings: "opsz" 144;
   }
-
-  header h1 em {
+  h1 em {
     font-style: italic;
-    font-weight: 400;
-    color: var(--gold-deep);
+    color: var(--accent);
+    font-weight: 600;
   }
-
-  .divider {
-    width: 48px;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 2px;
-    margin: 22px auto 16px;
-  }
-
-  header p {
-    font-size: 14px;
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(17px, 2.4vw, 21px);
     color: var(--ink-soft);
-    letter-spacing: 0.3px;
+    max-width: 580px;
+    margin: 0 auto;
   }
 
-  /* LISTA DE AULAS */
-  .aulas-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  /* ===== STATS ===== */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 36px 0 0;
+  }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px 18px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+  }
+  .stat .lbl {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    font-weight: 600;
   }
 
-  .aula-card {
+  /* ===== BLOCKS ===== */
+  .block {
+    margin-bottom: 44px;
+  }
+  .block-head {
     display: flex;
-    align-items: center;
-    background: var(--bg-soft);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 22px;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .block-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .block-num {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+  .block-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+  .block-title em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .block-meta {
+    margin-left: auto;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ===== LESSONS ===== */
+  .lessons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 640px) {
+    .lessons {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .lesson {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.25s var(--ease),
-                background 0.25s var(--ease),
-                border-color 0.25s var(--ease),
-                box-shadow 0.25s var(--ease);
-    opacity: 0;
-    animation: fadeUp 0.6s var(--ease) forwards;
-    box-shadow: var(--shadow-sm);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     position: relative;
-    overflow: hidden;
   }
-
-  .aula-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(184, 134, 11, 0.04) 100%);
-    opacity: 0;
-    transition: opacity 0.3s var(--ease);
-    pointer-events: none;
-  }
-
-  .aula-card:hover {
-    background: var(--bg-hover);
-    border-color: var(--border-strong);
+  a.lesson:hover {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 6px 18px rgba(26,24,20,0.08);
+    border-left-width: 5px;
   }
-
-  .aula-card:hover::before { opacity: 1; }
-
-  .aula-card:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .aula-numero {
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 34px;
-    font-weight: 500;
-    color: var(--gold);
-    min-width: 52px;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    font-variation-settings: "opsz" 144;
-    transition: color 0.25s var(--ease);
-  }
-
-  .aula-card:hover .aula-numero { color: var(--gold-deep); }
-
-  .aula-conteudo {
-    flex: 1;
-    padding: 0 14px;
-  }
-
-  .aula-titulo {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15.5px;
-    color: var(--ink);
-    font-weight: 600;
-    margin-bottom: 3px;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-  }
-
-  .aula-subtitulo {
-    font-family: 'Fraunces', Georgia, serif;
-    font-style: italic;
-    font-size: 13px;
-    color: var(--ink-mute);
-    font-weight: 400;
-    letter-spacing: 0.1px;
-  }
-
-  .aula-seta {
-    color: var(--gold);
-    font-size: 22px;
-    font-family: 'Fraunces', serif;
-    transition: transform 0.3s var(--ease);
-    line-height: 1;
-  }
-
-  .aula-card:hover .aula-seta {
-    transform: translateX(6px);
-  }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    margin-top: 48px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border);
-    font-size: 12px;
-    color: var(--ink-mute);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
+  a.lesson::after {
+    content: '→';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--accent);
     opacity: 0;
-    animation: fadeIn 1s var(--ease) 1.2s forwards;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
-
-  footer span {
+  a.lesson:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(3px);
+  }
+  .lesson.sensitive {
+    border-left-color: #B5342B;
+  }
+  a.lesson.sensitive::after {
+    color: #B5342B;
+  }
+  .lesson.done {
+    border-left-color: #2E7D4F;
+    background: rgba(46,125,79,0.04);
+  }
+  .lesson.coming {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .lesson-num {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 32px;
+    letter-spacing: -0.02em;
+  }
+  .lesson.sensitive .lesson-num { color: #B5342B; }
+  .lesson.done .lesson-num { color: #2E7D4F; }
+  .lesson-body {
+    flex: 1;
+    min-width: 0;
+    padding-right: 14px;
+  }
+  .lesson-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .lesson-tag {
     display: inline-block;
-    padding: 0 8px;
+    margin-top: 6px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #B5342B;
+    font-weight: 700;
   }
+  .lesson.done .lesson-tag { color: #2E7D4F; }
+  .lesson.coming .lesson-tag { color: var(--ink-soft); }
 
-  /* ANIMAÇÕES */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+  /* ===== LEGEND ===== */
+  .legend {
+    margin-top: 56px;
+    padding: 22px 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--ink-soft);
   }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-
-  /* Delays escalonados */
-  .aula-card:nth-child(1)  { animation-delay: 0.10s; }
-  .aula-card:nth-child(2)  { animation-delay: 0.15s; }
-  .aula-card:nth-child(3)  { animation-delay: 0.20s; }
-  .aula-card:nth-child(4)  { animation-delay: 0.25s; }
-  .aula-card:nth-child(5)  { animation-delay: 0.30s; }
-  .aula-card:nth-child(6)  { animation-delay: 0.35s; }
-  .aula-card:nth-child(7)  { animation-delay: 0.40s; }
-  .aula-card:nth-child(8)  { animation-delay: 0.45s; }
-  .aula-card:nth-child(9)  { animation-delay: 0.50s; }
-  .aula-card:nth-child(10) { animation-delay: 0.55s; }
-  .aula-card:nth-child(11) { animation-delay: 0.60s; }
-  .aula-card:nth-child(12) { animation-delay: 0.65s; }
-  .aula-card:nth-child(13) { animation-delay: 0.70s; }
-
-  /* FOCO ACESSÍVEL */
-  .aula-card:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
   }
+  .sw-default { background: var(--accent); }
+  .sw-sensitive { background: #B5342B; }
+  .sw-done { background: #2E7D4F; }
 
-  /* MOBILE */
-  @media (max-width: 480px) {
-    .aula-card { padding: 16px 18px; border-radius: 14px; }
-    .aula-numero { font-size: 28px; min-width: 44px; }
-    .aula-titulo { font-size: 14.5px; }
-    .aula-subtitulo { font-size: 12px; }
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .footer strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent);
   }
 </style>
 </head>
 <body>
+
 <div class="container">
 
-  <header>
-    <span class="eyebrow">Curso de História</span>
-    <h1>Sumário <em>das aulas</em></h1>
-    <div class="divider"></div>
-    <p>Selecione um módulo para começar</p>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="eyebrow">Curso particular · Planejamento completo</div>
+    <h1>Entender o <em>Mundo</em>.</h1>
+    <p class="subtitle">43 aulas pra sair de zero absoluto a uma lente própria pra interpretar história, política, economia e sociedade.</p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num">43</div>
+        <div class="lbl">Aulas</div>
+      </div>
+      <div class="stat">
+        <div class="num">9</div>
+        <div class="lbl">Blocos</div>
+      </div>
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="lbl">Sensíveis</div>
+      </div>
+    </div>
   </header>
 
-  <nav class="aulas-list">
+  <!-- BLOCO 1 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🌍</span>
+      <span class="block-num">01</span>
+      <h2 class="block-title">Fundamentos do <em>mundo</em></h2>
+      <span class="block-meta">Aulas 1–13</span>
+    </div>
+    <div class="lessons">
+      <div class="lesson coming"><span class="lesson-num">01</span><div class="lesson-body"><div class="lesson-title">Pré-história — como viramos humanos</div><span class="lesson-tag">Em breve</span></div></div>
+      <div class="lesson coming"><span class="lesson-num">02</span><div class="lesson-body"><div class="lesson-title">Revolução agrícola — o início da desigualdade</div><span class="lesson-tag">Em breve</span></div></div>
+      <div class="lesson coming"><span class="lesson-num">03</span><div class="lesson-body"><div class="lesson-title">Primeiras civilizações — Mesopotâmia, Egito</div><span class="lesson-tag">Em breve</span></div></div>
+      <a class="lesson" href="https://gustapauli.github.io/aula4" target="_blank" rel="noopener"><span class="lesson-num">04</span><div class="lesson-body"><div class="lesson-title">Grécia — onde nasce a política e a filosofia</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula5" target="_blank" rel="noopener"><span class="lesson-num">05</span><div class="lesson-body"><div class="lesson-title">Roma — império, direito e queda</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula6" target="_blank" rel="noopener"><span class="lesson-num">06</span><div class="lesson-body"><div class="lesson-title">Idade Média — o que realmente foi</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula7" target="_blank" rel="noopener"><span class="lesson-num">07</span><div class="lesson-body"><div class="lesson-title">Renascimento — o homem volta ao centro</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula8" target="_blank" rel="noopener"><span class="lesson-num">08</span><div class="lesson-body"><div class="lesson-title">Grandes Navegações — globalização 1.0</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula9" target="_blank" rel="noopener"><span class="lesson-num">09</span><div class="lesson-body"><div class="lesson-title">Reforma Protestante — quebra da unidade religiosa</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula10" target="_blank" rel="noopener"><span class="lesson-num">10</span><div class="lesson-body"><div class="lesson-title">Iluminismo — a razão como arma</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula11" target="_blank" rel="noopener"><span class="lesson-num">11</span><div class="lesson-body"><div class="lesson-title">Revolução Americana — o nascimento dos EUA</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula12" target="_blank" rel="noopener"><span class="lesson-num">12</span><div class="lesson-body"><div class="lesson-title">Revolução Francesa — o fim do Antigo Regime</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula13" target="_blank" rel="noopener"><span class="lesson-num">13</span><div class="lesson-body"><div class="lesson-title">Revolução Industrial — o mundo moderno nasce</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/apostila" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">01</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Por que estudar isso muda sua vida</div>
-        <div class="aula-subtitulo">Conceitos e fontes históricas</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 2 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🌐</span>
+      <span class="block-num">02</span>
+      <h2 class="block-title">O mundo no <em>século XIX</em></h2>
+      <span class="block-meta">Aulas 14–15</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson" href="https://gustapauli.github.io/aula14" target="_blank" rel="noopener"><span class="lesson-num">14</span><div class="lesson-body"><div class="lesson-title">Era das Ideologias — liberalismo, socialismo, marxismo, nacionalismo</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula15" target="_blank" rel="noopener"><span class="lesson-num">15</span><div class="lesson-body"><div class="lesson-title">Imperialismo — a partilha da África e Ásia</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/apostila" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">02</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Pré-História</div>
-        <div class="aula-subtitulo">Das origens à sedentarização</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 3 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🇧🇷</span>
+      <span class="block-num">03</span>
+      <h2 class="block-title">Brasil — o <em>DNA</em> do nosso país</h2>
+      <span class="block-meta">Aulas 16–23</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson" href="https://gustapauli.github.io/aula16" target="_blank" rel="noopener"><span class="lesson-num">16</span><div class="lesson-body"><div class="lesson-title">Brasil Colônia</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula17" target="_blank" rel="noopener"><span class="lesson-num">17</span><div class="lesson-body"><div class="lesson-title">Escravidão — a ferida que não fechou</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula18" target="_blank" rel="noopener"><span class="lesson-num">18</span><div class="lesson-body"><div class="lesson-title">Independência e Império</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula19" target="_blank" rel="noopener"><span class="lesson-num">19</span><div class="lesson-body"><div class="lesson-title">República Velha</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula20" target="_blank" rel="noopener"><span class="lesson-num">20</span><div class="lesson-body"><div class="lesson-title">Era Vargas</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula21" target="_blank" rel="noopener"><span class="lesson-num">21</span><div class="lesson-body"><div class="lesson-title">Ditadura militar</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula22" target="_blank" rel="noopener"><span class="lesson-num">22</span><div class="lesson-body"><div class="lesson-title">Redemocratização e Constituição de 88</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula23" target="_blank" rel="noopener"><span class="lesson-num">23</span><div class="lesson-body"><div class="lesson-title">Brasil hoje — diagnóstico estrutural</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/apostila" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">03</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Antiguidade Oriental</div>
-        <div class="aula-subtitulo">Egito e Mesopotâmia</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 4 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🌎</span>
+      <span class="block-num">04</span>
+      <h2 class="block-title">O mundo no <em>século XX</em></h2>
+      <span class="block-meta">Aulas 24–29</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson" href="https://gustapauli.github.io/aula24" target="_blank" rel="noopener"><span class="lesson-num">24</span><div class="lesson-body"><div class="lesson-title">Primeira Guerra Mundial</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula25" target="_blank" rel="noopener"><span class="lesson-num">25</span><div class="lesson-body"><div class="lesson-title">Entreguerras, crise de 1929 e ascensão dos totalitarismos</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula26" target="_blank" rel="noopener"><span class="lesson-num">26</span><div class="lesson-body"><div class="lesson-title">Segunda Guerra Mundial</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula27" target="_blank" rel="noopener"><span class="lesson-num">27</span><div class="lesson-body"><div class="lesson-title">Guerra Fria e descolonização</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula28" target="_blank" rel="noopener"><span class="lesson-num">28</span><div class="lesson-body"><div class="lesson-title">Mundo islâmico e Oriente Médio</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula29" target="_blank" rel="noopener"><span class="lesson-num">29</span><div class="lesson-body"><div class="lesson-title">China — do século da humilhação à superpotência</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/aula4" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">04</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Grécia Antiga</div>
-        <div class="aula-subtitulo">Pólis, democracia e cultura</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 5 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">💰</span>
+      <span class="block-num">05</span>
+      <h2 class="block-title">Os <em>sistemas econômicos</em></h2>
+      <span class="block-meta">Aulas 30–33</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson" href="https://gustapauli.github.io/aula30" target="_blank" rel="noopener"><span class="lesson-num">30</span><div class="lesson-body"><div class="lesson-title">Capitalismo — como nasceu, como funciona, suas contradições</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula31" target="_blank" rel="noopener"><span class="lesson-num">31</span><div class="lesson-body"><div class="lesson-title">Socialismo e Comunismo — Marx, URSS, China, Cuba</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula32" target="_blank" rel="noopener"><span class="lesson-num">32</span><div class="lesson-body"><div class="lesson-title">Híbridos do mundo real — social-democracia, economia mista, modelos asiáticos</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula33" target="_blank" rel="noopener"><span class="lesson-num">33</span><div class="lesson-body"><div class="lesson-title">Juros, inflação e dinheiro no dia a dia</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/aula5" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">05</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Roma Antiga</div>
-        <div class="aula-subtitulo">República e Império</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 6 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">⚖️</span>
+      <span class="block-num">06</span>
+      <h2 class="block-title">Política <em>de verdade</em></h2>
+      <span class="block-meta">Aulas 34–37</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson" href="https://gustapauli.github.io/aula34" target="_blank" rel="noopener"><span class="lesson-num">34</span><div class="lesson-body"><div class="lesson-title">Direita e esquerda — o que é, de verdade</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula35" target="_blank" rel="noopener"><span class="lesson-num">35</span><div class="lesson-body"><div class="lesson-title">Os 3 poderes — como funcionam (e como falham)</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula36" target="_blank" rel="noopener"><span class="lesson-num">36</span><div class="lesson-body"><div class="lesson-title">Sistema eleitoral — quem se beneficia das regras</div></div></a>
+      <a class="lesson" href="https://gustapauli.github.io/aula37" target="_blank" rel="noopener"><span class="lesson-num">37</span><div class="lesson-body"><div class="lesson-title">Mídia, algoritmo e formação de opinião</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/aula6" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">06</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Idade Média</div>
-        <div class="aula-subtitulo">Feudalismo e Igreja</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 7 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🗳️</span>
+      <span class="block-num">07</span>
+      <h2 class="block-title">Manual prático do <em>cidadão brasileiro</em></h2>
+      <span class="block-meta">Aulas 38–39</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson sensitive" href="https://gustapauli.github.io/aula38" target="_blank" rel="noopener">
+        <span class="lesson-num">38</span>
+        <div class="lesson-body">
+          <div class="lesson-title">Escândalos da política brasileira recente — Mensalão, Lava Jato, Dilma, Temer, Centrão, Banco Master</div>
+          <span class="lesson-tag">Sensível · alinhar antes</span>
+        </div>
+      </a>
+      <a class="lesson sensitive" href="https://gustapauli.github.io/aula39" target="_blank" rel="noopener">
+        <span class="lesson-num">39</span>
+        <div class="lesson-body">
+          <div class="lesson-title">Manual para votar em 2026 — pré-candidatos, propostas, decisão por fato</div>
+          <span class="lesson-tag">Sensível · alinhar antes</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/aula7" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">07</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Renascimento</div>
-        <div class="aula-subtitulo">Humanismo e ciência moderna</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 8 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🔭</span>
+      <span class="block-num">08</span>
+      <h2 class="block-title">Sociedade e <em>futuro</em></h2>
+      <span class="block-meta">Aulas 40–41</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson sensitive" href="https://gustapauli.github.io/aula40" target="_blank" rel="noopener">
+        <span class="lesson-num">40</span>
+        <div class="lesson-body">
+          <div class="lesson-title">Geopolítica hoje — EUA, China, Rússia, BRICS, multipolaridade</div>
+          <span class="lesson-tag">Sensível · alinhar antes</span>
+        </div>
+      </a>
+      <a class="lesson" href="https://gustapauli.github.io/aula41" target="_blank" rel="noopener"><span class="lesson-num">41</span><div class="lesson-body"><div class="lesson-title">Estruturas invisíveis (classe, raça, gênero) + tecnologia, IA e o novo poder</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/aula8" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">08</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Grandes Navegações</div>
-        <div class="aula-subtitulo">Expansão marítima europeia</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- BLOCO 9 -->
+  <section class="block">
+    <div class="block-head">
+      <span class="block-icon">🧠</span>
+      <span class="block-num">09</span>
+      <h2 class="block-title">Lente crítica e <em>fechamento</em></h2>
+      <span class="block-meta">Aulas 42–43</span>
+    </div>
+    <div class="lessons">
+      <a class="lesson sensitive" href="https://gustapauli.github.io/aula42" target="_blank" rel="noopener">
+        <span class="lesson-num">42</span>
+        <div class="lesson-body">
+          <div class="lesson-title">Como a história é contada — quem escreve, o que some, por que importa</div>
+          <span class="lesson-tag">Sensível · alinhar antes</span>
+        </div>
+      </a>
+      <a class="lesson" href="https://gustapauli.github.io/aula43" target="_blank" rel="noopener"><span class="lesson-num">43</span><div class="lesson-body"><div class="lesson-title">Aula final — o que você pode fazer e a estrutura mental que você agora tem</div></div></a>
+    </div>
+  </section>
 
-    <a href="https://gustapauli.github.io/aula9" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">09</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Absolutismo e Mercantilismo</div>
-        <div class="aula-subtitulo">O Estado Moderno</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch sw-default"></span> Aula padrão</div>
+    <div class="legend-item"><span class="legend-swatch sw-sensitive"></span> Sensível — alinhar antes</div>
+    <div class="legend-item"><span class="legend-swatch sw-done"></span> Concluída</div>
+  </div>
 
-    <a href="https://gustapauli.github.io/aula10" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">10</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Iluminismo</div>
-        <div class="aula-subtitulo">Razão e liberdade</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
-
-    <a href="https://gustapauli.github.io/aula11" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">11</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Revolução Francesa</div>
-        <div class="aula-subtitulo">Liberdade, Igualdade, Fraternidade</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
-
-    <a href="https://gustapauli.github.io/aula12" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">12</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Revolução Americana</div>
-        <div class="aula-subtitulo">Independência dos EUA</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
-
-    <a href="https://gustapauli.github.io/aula13" class="aula-card" target="_blank" rel="noopener">
-      <span class="aula-numero">13</span>
-      <div class="aula-conteudo">
-        <div class="aula-titulo">Revolução Industrial</div>
-        <div class="aula-subtitulo">Capitalismo e sociedade urbana</div>
-      </div>
-      <span class="aula-seta">›</span>
-    </a>
-
-  </nav>
-
-  <footer>
-    <span>Curso de História</span>
-  </footer>
+  <!-- FOOTER -->
+  <div class="footer">
+    Cada aula constrói em cima da anterior. <strong>Como tijolo numa parede.</strong>
+  </div>
 
 </div>
+
 </body>
 </html>
