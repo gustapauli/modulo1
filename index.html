@@ -6,6 +6,16 @@
 <title>Entender o Mundo</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
   body {
     background: #EFEAE0;
     color: #1A1814;
@@ -13,114 +23,285 @@
     font-size: 16px;
     line-height: 1.55;
     padding: 40px 20px 80px;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(rgba(26,24,20,0.025) 1px, transparent 1px),
+      radial-gradient(rgba(26,24,20,0.015) 1px, transparent 1px);
+    background-size: 3px 3px, 7px 7px;
+    background-position: 0 0, 1px 1px;
   }
-  .container { max-width: 980px; margin: 0 auto; }
+
+  .container { max-width: 980px; margin: 0 auto; position: relative; }
+
+  /* ===== CURTAIN REVEAL ===== */
+  .curtain {
+    position: fixed;
+    inset: 0;
+    background: #EFEAE0;
+    z-index: 9999;
+    transform-origin: top;
+    animation: curtainUp 1.2s var(--ease-apple) 0.2s forwards;
+    pointer-events: none;
+  }
+  @keyframes curtainUp {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(0); }
+  }
+
+  /* ===== ANIMAÇÕES BASE ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slowSpin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+  @keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.08; }
+    50% { opacity: 0.14; }
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes letterReveal {
+    from { opacity: 0; transform: translateY(60%) rotateX(-40deg); }
+    to { opacity: 1; transform: translateY(0) rotateX(0); }
+  }
 
   /* ===== HERO ===== */
   .hero {
-    background: linear-gradient(135deg, #1A1814 0%, #2A2620 100%);
+    background: linear-gradient(135deg, #1A1814 0%, #2A2620 50%, #1A1814 100%);
+    background-size: 200% 200%;
     color: #F4EFE6;
-    border-radius: 20px;
-    padding: 56px 44px;
-    margin-bottom: 40px;
+    border-radius: 24px;
+    padding: 64px 48px;
+    margin-bottom: 48px;
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    animation:
+      heroEnter 1.2s var(--ease-apple) 0.9s forwards,
+      gradientShift 15s ease-in-out 2s infinite;
+    box-shadow: 0 20px 60px -20px rgba(26,24,20,0.3);
+    perspective: 1000px;
+  }
+  @keyframes heroEnter {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(244,232,200,0.06), transparent);
+    animation: shimmer 6s ease-in-out 2s infinite;
+    pointer-events: none;
   }
   .hero-art {
     position: absolute;
     right: -40px;
     top: 50%;
-    transform: translateY(-50%);
-    width: 320px;
-    height: 320px;
+    width: 340px;
+    height: 340px;
     opacity: 0.18;
     pointer-events: none;
+    transform: translateY(-50%);
+    animation: slowSpin 120s linear infinite;
+    will-change: transform;
   }
-  .hero-content { position: relative; z-index: 1; }
+  .hero-content { position: relative; z-index: 1; transform-style: preserve-3d; }
+
   .hero-eyebrow {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: #B8862F;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-apple) 1.2s forwards;
   }
+
   .hero h1 {
     font-family: Georgia, serif;
     font-weight: 700;
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(34px, 5.2vw, 52px);
     line-height: 1.05;
     letter-spacing: -0.02em;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    perspective: 800px;
   }
-  .hero h1 em {
-    font-style: italic;
-    color: #F4E8C8;
+  .hero h1 .word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
   }
+  .hero h1 .word span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%) rotateX(-40deg);
+    animation: letterReveal 0.9s var(--ease-apple) forwards;
+  }
+  .hero h1 em { font-style: italic; color: #F4E8C8; }
   .hero-sub {
     font-family: Georgia, serif;
     font-style: italic;
     font-size: 18px;
     color: rgba(244,239,230,0.75);
     max-width: 540px;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease-apple) 1.8s forwards;
   }
 
   /* ===== MODULES ===== */
   .module {
     background: #FFFFFF;
-    border: 1px solid rgba(26,24,20,0.10);
-    border-radius: 18px;
+    border: 1px solid rgba(26,24,20,0.08);
+    border-radius: 20px;
     margin-bottom: 24px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(26,24,20,0.03);
-    transition: box-shadow 0.2s ease;
+    transition:
+      box-shadow 0.5s var(--ease-apple),
+      transform 0.5s var(--ease-apple),
+      border-color 0.4s ease;
+    position: relative;
+    will-change: transform, opacity;
   }
-  .module:hover { box-shadow: 0 6px 20px rgba(26,24,20,0.06); }
+
+  /* MÓDULOS QUE ANIMAM NO SCROLL (não os above-the-fold) */
+  .module.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96) rotateX(8deg);
+    transform-origin: center top;
+    perspective: 1200px;
+  }
+  .module.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0);
+    transition:
+      opacity 0.9s var(--ease-apple),
+      transform 1s var(--ease-apple);
+  }
+
+  /* MÓDULOS ABOVE-THE-FOLD (entram no load, sem esperar scroll) */
+  .module.reveal-on-load {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: moduleLoadIn 1s var(--ease-apple) forwards;
+  }
+  .module.reveal-on-load:nth-of-type(2) { animation-delay: 1.3s; }
+  @keyframes moduleLoadIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .module:hover {
+    box-shadow: 0 24px 60px -15px rgba(26,24,20,0.15), 0 8px 20px -10px rgba(184,134,47,0.1);
+    border-color: rgba(184,134,47,0.2);
+  }
+
+  .module-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: radial-gradient(
+      400px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(184,134,47,0.10),
+      transparent 50%
+    );
+    z-index: 0;
+  }
+  .module:hover .module-glow { opacity: 1; }
 
   .module-header {
-    padding: 26px 30px;
+    padding: 28px 32px;
     background: #FBF7EF;
-    border-bottom: 1px solid rgba(26,24,20,0.10);
+    border-bottom: 1px solid rgba(26,24,20,0.08);
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 22px;
     cursor: pointer;
     user-select: none;
-    transition: background 0.2s ease;
+    transition: background 0.4s var(--ease-smooth);
     position: relative;
     overflow: hidden;
+    z-index: 1;
   }
   .module-header:hover { background: #F6F0E2; }
+
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(184,134,47,0.25);
+    transform: scale(0);
+    animation: rippleEffect 0.7s var(--ease-out);
+    pointer-events: none;
+  }
+  @keyframes rippleEffect {
+    to { transform: scale(4); opacity: 0; }
+  }
 
   .module-bg-art {
     position: absolute;
     right: -20px;
     top: 50%;
-    transform: translateY(-50%);
-    width: 140px;
-    height: 140px;
-    opacity: 0.08;
+    width: 150px;
+    height: 150px;
     pointer-events: none;
+    transform: translateY(-50%);
+    transition: transform 0.8s var(--ease-apple), opacity 0.5s ease;
+    animation: pulse 6s ease-in-out infinite;
+    will-change: transform;
+  }
+  .module-header:hover .module-bg-art {
+    transform: translateY(-50%) scale(1.12) rotate(-5deg);
+    opacity: 0.16;
   }
 
   .module-badge {
-    width: 64px;
-    height: 64px;
+    width: 66px;
+    height: 66px;
     background: linear-gradient(135deg, #F4E8C8 0%, #E8D49C 100%);
-    border-radius: 16px;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     border: 1px solid rgba(184,134,47,0.25);
-    box-shadow: 0 2px 6px rgba(184,134,47,0.15);
+    box-shadow: 0 4px 12px rgba(184,134,47,0.18), inset 0 1px 0 rgba(255,255,255,0.5);
     position: relative;
     z-index: 1;
+    transition:
+      transform 0.6s var(--ease-spring),
+      box-shadow 0.5s ease;
+  }
+  .module-header:hover .module-badge {
+    transform: rotate(-8deg) scale(1.08) translateY(-2px);
+    box-shadow: 0 10px 24px rgba(184,134,47,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
   }
   .module-badge svg {
     width: 36px;
     height: 36px;
     color: #8C6420;
+    transition: transform 0.5s var(--ease-spring);
+  }
+  .module-header:hover .module-badge svg {
+    transform: rotate(8deg) scale(1.05);
   }
 
   .module-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
@@ -138,79 +319,138 @@
     font-size: clamp(20px, 2.6vw, 26px);
     line-height: 1.2;
     margin-bottom: 6px;
+    transition: color 0.3s ease;
   }
-  .module-title em {
-    font-style: italic;
-    color: #B8862F;
-  }
-  .module-stats {
-    font-size: 13px;
-    color: #8A8478;
-  }
+  .module-title em { font-style: italic; color: #B8862F; }
+  .module-stats { font-size: 13px; color: #8A8478; }
   .module-stats strong { color: #8C6420; }
 
   .module-toggle {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: #FFFFFF;
-    border: 1px solid rgba(26,24,20,0.18);
+    border: 1px solid rgba(26,24,20,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #5A554D;
     font-size: 14px;
     flex-shrink: 0;
-    transition: transform 0.25s ease;
+    transition:
+      transform 0.5s var(--ease-spring),
+      background 0.4s ease,
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
     position: relative;
     z-index: 1;
   }
   .module.collapsed .module-toggle { transform: rotate(-90deg); }
+  .module-header:hover .module-toggle {
+    background: #F4E8C8;
+    border-color: #B8862F;
+    box-shadow: 0 4px 12px rgba(184,134,47,0.25);
+    transform: scale(1.08);
+  }
+  .module.collapsed .module-header:hover .module-toggle {
+    transform: rotate(-90deg) scale(1.08);
+  }
 
   .module-body {
-    padding: 18px 22px 24px;
+    padding: 20px 24px 26px;
     max-height: 4000px;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
+    transition:
+      max-height 0.7s var(--ease-apple),
+      padding 0.5s ease,
+      opacity 0.5s ease;
   }
   .module.collapsed .module-body {
     max-height: 0;
     padding-top: 0;
     padding-bottom: 0;
+    opacity: 0;
   }
 
   /* ===== LESSONS ===== */
   .lessons {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 10px;
   }
   @media (min-width: 720px) {
-    .lessons { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .lessons { grid-template-columns: 1fr 1fr; gap: 12px; }
   }
 
   .lesson {
     background: #FBF7EF;
-    border: 1px solid rgba(26,24,20,0.10);
-    border-radius: 12px;
+    border: 1px solid rgba(26,24,20,0.08);
+    border-radius: 14px;
     padding: 14px 16px;
     display: flex;
     gap: 14px;
     align-items: center;
     text-decoration: none;
     color: inherit;
-    transition: all 0.18s ease;
+    transition:
+      transform 0.4s var(--ease-apple),
+      background 0.4s ease,
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .module:not(.collapsed) .lesson {
+    animation: lessonIn 0.6s var(--ease-apple) forwards;
+  }
+  .module:not(.collapsed) .lesson:nth-child(1) { animation-delay: 0.05s; }
+  .module:not(.collapsed) .lesson:nth-child(2) { animation-delay: 0.10s; }
+  .module:not(.collapsed) .lesson:nth-child(3) { animation-delay: 0.15s; }
+  .module:not(.collapsed) .lesson:nth-child(4) { animation-delay: 0.20s; }
+  .module:not(.collapsed) .lesson:nth-child(5) { animation-delay: 0.25s; }
+  .module:not(.collapsed) .lesson:nth-child(6) { animation-delay: 0.30s; }
+  .module:not(.collapsed) .lesson:nth-child(7) { animation-delay: 0.35s; }
+  .module:not(.collapsed) .lesson:nth-child(8) { animation-delay: 0.40s; }
+  .module:not(.collapsed) .lesson:nth-child(9) { animation-delay: 0.45s; }
+  .module:not(.collapsed) .lesson:nth-child(10) { animation-delay: 0.50s; }
+  .module:not(.collapsed) .lesson:nth-child(11) { animation-delay: 0.55s; }
+  .module:not(.collapsed) .lesson:nth-child(12) { animation-delay: 0.60s; }
+  .module:not(.collapsed) .lesson:nth-child(13) { animation-delay: 0.65s; }
+  @keyframes lessonIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .lesson::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px;
+    height: 100%;
+    background: #B8862F;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.4s var(--ease-apple);
   }
   a.lesson:hover {
     background: #FFFFFF;
     border-color: #B8862F;
-    transform: translateX(3px);
-    box-shadow: 0 4px 14px rgba(184,134,47,0.12);
+    transform: translateX(6px) translateY(-2px);
+    box-shadow: 0 12px 24px -8px rgba(184,134,47,0.2);
+  }
+  a.lesson:active {
+    transform: translateX(4px) translateY(0) scale(0.99);
+    transition: transform 0.15s ease;
+  }
+  a.lesson:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
   }
 
   .lesson-play {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: #F4E8C8;
     border: 1px solid rgba(184,134,47,0.25);
@@ -218,17 +458,23 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    transition: all 0.2s ease;
+    transition: all 0.4s var(--ease-spring);
   }
   .lesson-play::after {
     content: '';
     width: 0; height: 0;
-    border-left: 8px solid #8C6420;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
+    border-left: 9px solid #8C6420;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
     margin-left: 2px;
+    transition: border-left-color 0.3s ease;
   }
-  a.lesson:hover .lesson-play { background: #B8862F; border-color: #B8862F; }
+  a.lesson:hover .lesson-play {
+    background: #B8862F;
+    border-color: #B8862F;
+    transform: scale(1.15) rotate(360deg);
+    box-shadow: 0 6px 14px rgba(184,134,47,0.35);
+  }
   a.lesson:hover .lesson-play::after { border-left-color: #FFFFFF; }
 
   .lesson-content { flex: 1; min-width: 0; }
@@ -246,7 +492,10 @@
     font-size: 15px;
     line-height: 1.3;
     color: #1A1814;
+    transition: color 0.3s ease;
   }
+  a.lesson:hover .lesson-title { color: #8C6420; }
+
   .lesson-tag {
     display: inline-block;
     margin-top: 4px;
@@ -265,27 +514,32 @@
     border-color: rgba(181,52,43,0.3);
   }
   .lesson.sensitive .lesson-play::after { border-left-color: #B5342B; }
-  a.lesson.sensitive:hover { border-color: #B5342B; }
+  a.lesson.sensitive::before { background: #B5342B; }
+  a.lesson.sensitive:hover { border-color: #B5342B; box-shadow: 0 12px 24px -8px rgba(181,52,43,0.2); }
   a.lesson.sensitive:hover .lesson-play { background: #B5342B; border-color: #B5342B; }
   a.lesson.sensitive:hover .lesson-play::after { border-left-color: #FFFFFF; }
+  a.lesson.sensitive:hover .lesson-title { color: #B5342B; }
 
   /* ===== FOOTER ===== */
   .footer {
-    margin-top: 56px;
-    padding: 40px 32px;
+    margin-top: 64px;
+    padding: 48px 32px;
     background: #FFFFFF;
-    border: 1px solid rgba(26,24,20,0.10);
-    border-radius: 16px;
+    border: 1px solid rgba(26,24,20,0.08);
+    border-radius: 20px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s var(--ease-apple), transform 1s var(--ease-apple);
   }
+  .footer.is-visible { opacity: 1; transform: translateY(0); }
   .footer-art {
     width: 60px;
     height: 60px;
-    margin: 0 auto 16px;
+    margin: 0 auto 18px;
     color: #B8862F;
     opacity: 0.7;
+    animation: gentleFloat 4s ease-in-out infinite;
   }
   .footer-quote {
     font-family: Georgia, serif;
@@ -295,20 +549,63 @@
     max-width: 520px;
     margin: 0 auto;
   }
-  .footer-quote strong {
-    font-style: normal;
-    color: #8C6420;
+  .footer-quote strong { font-style: normal; color: #8C6420; }
+
+  /* ===== ANIMAÇÕES ESPECÍFICAS ===== */
+  .gear-spin {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: gearRotate 20s linear infinite;
+  }
+  @keyframes gearRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .globe-spin {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: gearRotate 40s linear infinite;
+  }
+  .eye-pulse {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: eyePulse 4s ease-in-out infinite;
+  }
+  @keyframes eyePulse {
+    0%, 90%, 100% { transform: scale(1); }
+    95% { transform: scale(0.85); }
+  }
+
+  /* Brasil - leve breathing no contorno */
+  .brasil-breath {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: brasilBreath 5s ease-in-out infinite;
+  }
+  @keyframes brasilBreath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .module { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
+<div class="curtain"></div>
+
 <div class="container">
 
   <!-- HERO -->
-  <header class="hero">
-    <!-- Ilustração de fundo: globo + linhas -->
-    <svg class="hero-art" viewBox="0 0 200 200" fill="none" stroke="#F4E8C8" stroke-width="1.2">
+  <header class="hero" id="hero">
+    <svg class="hero-art" id="heroArt" viewBox="0 0 200 200" fill="none" stroke="#F4E8C8" stroke-width="1.2">
       <circle cx="100" cy="100" r="80"/>
       <ellipse cx="100" cy="100" rx="80" ry="32"/>
       <ellipse cx="100" cy="100" rx="40" ry="80"/>
@@ -318,14 +615,15 @@
     </svg>
     <div class="hero-content">
       <div class="hero-eyebrow">Area do aluno - 43 aulas - 9 modulos</div>
-      <h1>Entender o <em>Mundo</em>.</h1>
+      <h1 id="heroTitle">Entender o <em>Mundo</em>.</h1>
       <p class="hero-sub">De zero absoluto a uma lente propria pra interpretar historia, politica, economia e sociedade.</p>
     </div>
   </header>
 
-  <!-- MODULO 01 - Fundamentos (coluna/templo grego) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 01 - above the fold (entra no load) -->
+  <article class="module reveal-on-load">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
         <rect x="10" y="20" width="80" height="8"/>
         <rect x="15" y="28" width="10" height="55"/>
@@ -372,33 +670,38 @@
     </div>
   </article>
 
-  <!-- MODULO 02 - Seculo XIX (engrenagem industrial) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 02 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
-        <circle cx="50" cy="50" r="20"/>
-        <circle cx="50" cy="50" r="6"/>
-        <line x1="50" y1="22" x2="50" y2="30"/>
-        <line x1="50" y1="70" x2="50" y2="78"/>
-        <line x1="22" y1="50" x2="30" y2="50"/>
-        <line x1="70" y1="50" x2="78" y2="50"/>
-        <line x1="32" y1="32" x2="38" y2="38"/>
-        <line x1="62" y1="62" x2="68" y2="68"/>
-        <line x1="32" y1="68" x2="38" y2="62"/>
-        <line x1="62" y1="38" x2="68" y2="32"/>
+        <g class="gear-spin" style="transform-origin: 50px 50px;">
+          <circle cx="50" cy="50" r="20"/>
+          <circle cx="50" cy="50" r="6"/>
+          <line x1="50" y1="22" x2="50" y2="30"/>
+          <line x1="50" y1="70" x2="50" y2="78"/>
+          <line x1="22" y1="50" x2="30" y2="50"/>
+          <line x1="70" y1="50" x2="78" y2="50"/>
+          <line x1="32" y1="32" x2="38" y2="38"/>
+          <line x1="62" y1="62" x2="68" y2="68"/>
+          <line x1="32" y1="68" x2="38" y2="62"/>
+          <line x1="62" y1="38" x2="68" y2="32"/>
+        </g>
       </svg>
       <div class="module-badge">
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="24" cy="24" r="9"/>
-          <circle cx="24" cy="24" r="3"/>
-          <line x1="24" y1="8" x2="24" y2="12"/>
-          <line x1="24" y1="36" x2="24" y2="40"/>
-          <line x1="8" y1="24" x2="12" y2="24"/>
-          <line x1="36" y1="24" x2="40" y2="24"/>
-          <line x1="13" y1="13" x2="16" y2="16"/>
-          <line x1="32" y1="32" x2="35" y2="35"/>
-          <line x1="13" y1="35" x2="16" y2="32"/>
-          <line x1="32" y1="16" x2="35" y2="13"/>
+          <g class="gear-spin" style="transform-origin: 24px 24px;">
+            <circle cx="24" cy="24" r="9"/>
+            <circle cx="24" cy="24" r="3"/>
+            <line x1="24" y1="8" x2="24" y2="12"/>
+            <line x1="24" y1="36" x2="24" y2="40"/>
+            <line x1="8" y1="24" x2="12" y2="24"/>
+            <line x1="36" y1="24" x2="40" y2="24"/>
+            <line x1="13" y1="13" x2="16" y2="16"/>
+            <line x1="32" y1="32" x2="35" y2="35"/>
+            <line x1="13" y1="35" x2="16" y2="32"/>
+            <line x1="32" y1="16" x2="35" y2="13"/>
+          </g>
         </svg>
       </div>
       <div class="module-info">
@@ -416,17 +719,22 @@
     </div>
   </article>
 
-  <!-- MODULO 03 - Brasil (mapa estilizado) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
-      <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
-        <path d="M30 20 Q50 15 70 25 Q80 40 75 60 Q70 80 50 85 Q30 80 25 60 Q20 40 30 20 Z"/>
-        <circle cx="50" cy="50" r="6"/>
+  <!-- MODULO 03 - BRASIL com silhueta real -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
+      <!-- Silhueta do Brasil no fundo -->
+      <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <g class="brasil-breath" style="transform-origin: 50px 50px;">
+          <!-- Contorno simplificado do Brasil -->
+          <path d="M38 12 L44 10 L50 13 L56 11 L62 15 L65 22 L72 24 L76 30 L74 36 L80 40 L82 48 L78 54 L82 60 L80 68 L74 74 L68 78 L62 84 L54 88 L46 86 L40 82 L34 76 L28 70 L24 62 L22 54 L20 46 L22 38 L26 30 L30 22 L34 16 Z"/>
+        </g>
       </svg>
       <div class="module-badge">
-        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 10 Q26 8 34 14 Q40 22 38 32 Q34 40 24 40 Q14 38 12 28 Q10 18 16 10 Z"/>
-          <circle cx="24" cy="24" r="3" fill="currentColor"/>
+        <!-- Silhueta do Brasil no badge -->
+        <svg viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M19 6 L22 5 L25 7 L28 6 L31 8 L33 12 L36 13 L38 17 L37 20 L40 22 L41 26 L39 29 L41 33 L39 37 L36 40 L33 42 L29 44 L25 45 L21 44 L18 41 L15 38 L13 34 L11 30 L10 26 L11 22 L13 18 L15 14 L17 10 Z" opacity="0.15"/>
+          <path d="M19 6 L22 5 L25 7 L28 6 L31 8 L33 12 L36 13 L38 17 L37 20 L40 22 L41 26 L39 29 L41 33 L39 37 L36 40 L33 42 L29 44 L25 45 L21 44 L18 41 L15 38 L13 34 L11 30 L10 26 L11 22 L13 18 L15 14 L17 10 Z" fill="none"/>
         </svg>
       </div>
       <div class="module-info">
@@ -450,14 +758,17 @@
     </div>
   </article>
 
-  <!-- MODULO 04 - Seculo XX (globo + rede) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 04 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
-        <circle cx="50" cy="50" r="35"/>
-        <ellipse cx="50" cy="50" rx="35" ry="14"/>
-        <ellipse cx="50" cy="50" rx="14" ry="35"/>
-        <line x1="15" y1="50" x2="85" y2="50"/>
+        <g class="globe-spin" style="transform-origin: 50px 50px;">
+          <circle cx="50" cy="50" r="35"/>
+          <ellipse cx="50" cy="50" rx="35" ry="14"/>
+          <ellipse cx="50" cy="50" rx="14" ry="35"/>
+          <line x1="15" y1="50" x2="85" y2="50"/>
+        </g>
       </svg>
       <div class="module-badge">
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -486,9 +797,10 @@
     </div>
   </article>
 
-  <!-- MODULO 05 - Economia (moeda + grafico) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 05 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
         <circle cx="50" cy="50" r="28"/>
         <path d="M50 35 L50 65 M42 42 Q42 38 50 38 Q58 38 58 44 Q58 50 50 50 Q42 50 42 56 Q42 62 50 62 Q58 62 58 58"/>
@@ -516,9 +828,10 @@
     </div>
   </article>
 
-  <!-- MODULO 06 - Politica (balanca da justica) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 06 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
         <line x1="50" y1="15" x2="50" y2="85"/>
         <line x1="25" y1="30" x2="75" y2="30"/>
@@ -556,9 +869,10 @@
     </div>
   </article>
 
-  <!-- MODULO 07 - Cidadao (urna de voto) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 07 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
         <rect x="25" y="35" width="50" height="50"/>
         <line x1="40" y1="45" x2="60" y2="45"/>
@@ -601,9 +915,10 @@
     </div>
   </article>
 
-  <!-- MODULO 08 - Futuro (foguete/telescopio) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 08 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
         <path d="M50 15 L60 40 L60 70 L40 70 L40 40 Z"/>
         <circle cx="50" cy="45" r="5"/>
@@ -642,19 +957,24 @@
     </div>
   </article>
 
-  <!-- MODULO 09 - Lente critica (cerebro/olho) -->
-  <article class="module">
-    <header class="module-header" onclick="toggleModule(this)">
+  <!-- MODULO 09 -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
       <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2">
         <path d="M20 50 Q35 25 50 25 Q65 25 80 50 Q65 75 50 75 Q35 75 20 50 Z"/>
-        <circle cx="50" cy="50" r="12"/>
-        <circle cx="50" cy="50" r="5" fill="#8C6420"/>
+        <g class="eye-pulse" style="transform-origin: 50px 50px;">
+          <circle cx="50" cy="50" r="12"/>
+          <circle cx="50" cy="50" r="5" fill="#8C6420"/>
+        </g>
       </svg>
       <div class="module-badge">
         <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 24 Q14 10 24 10 Q34 10 42 24 Q34 38 24 38 Q14 38 6 24 Z"/>
-          <circle cx="24" cy="24" r="7"/>
-          <circle cx="24" cy="24" r="3" fill="currentColor"/>
+          <g class="eye-pulse" style="transform-origin: 24px 24px;">
+            <circle cx="24" cy="24" r="7"/>
+            <circle cx="24" cy="24" r="3" fill="currentColor"/>
+          </g>
         </svg>
       </div>
       <div class="module-info">
@@ -680,7 +1000,7 @@
   </article>
 
   <!-- FOOTER -->
-  <div class="footer">
+  <div class="footer" id="footer">
     <svg class="footer-art" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <rect x="8" y="12" width="32" height="28" rx="2"/>
       <line x1="8" y1="20" x2="40" y2="20"/>
@@ -696,9 +1016,150 @@
 </div>
 
 <script>
-  function toggleModule(header) {
+  /* ===== TOGGLE COM RIPPLE ===== */
+  function toggleModule(header, event) {
+    if (event) {
+      const rect = header.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (event.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (event.clientY - rect.top - size / 2) + 'px';
+      header.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 700);
+    }
     header.parentElement.classList.toggle('collapsed');
   }
+
+  /* ===== HERO TITLE - REVEAL POR PALAVRA ===== */
+  (function splitHeroTitle() {
+    const h1 = document.getElementById('heroTitle');
+    if (!h1) return;
+    const tmp = document.createElement('div');
+    tmp.innerHTML = h1.innerHTML;
+    const words = [];
+    function walk(node) {
+      node.childNodes.forEach(n => {
+        if (n.nodeType === 3) {
+          n.textContent.split(/(\s+)/).forEach(w => {
+            if (w.trim()) words.push({ text: w, em: false });
+            else if (w.length) words.push({ text: w, space: true });
+          });
+        } else if (n.nodeType === 1) {
+          const isEm = n.tagName === 'EM';
+          n.textContent.split(/(\s+)/).forEach(w => {
+            if (w.trim()) words.push({ text: w, em: isEm });
+            else if (w.length) words.push({ text: w, space: true });
+          });
+        }
+      });
+    }
+    walk(tmp);
+    h1.innerHTML = '';
+    let delay = 1.0;
+    words.forEach(w => {
+      if (w.space) { h1.appendChild(document.createTextNode(' ')); return; }
+      const wrap = document.createElement('span');
+      wrap.className = 'word';
+      const inner = document.createElement('span');
+      inner.textContent = w.text;
+      inner.style.animationDelay = delay + 's';
+      if (w.em) {
+        const em = document.createElement('em');
+        em.appendChild(inner);
+        wrap.appendChild(em);
+      } else {
+        wrap.appendChild(inner);
+      }
+      h1.appendChild(wrap);
+      delay += 0.08;
+    });
+  })();
+
+  /* ===== INTERSECTION OBSERVER ===== */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.module.reveal-on-scroll').forEach(m => io.observe(m));
+  const footer = document.getElementById('footer');
+  if (footer) io.observe(footer);
+
+  /* ===== TILT 3D + GLOW ===== */
+  document.querySelectorAll('.module').forEach(module => {
+    const glow = module.querySelector('.module-glow');
+    let rafId = null;
+
+    module.addEventListener('mousemove', (e) => {
+      const rect = module.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const rx = ((y - cy) / cy) * -2.5;
+      const ry = ((x - cx) / cx) * 2.5;
+
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        module.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+        if (glow) {
+          glow.style.setProperty('--mx', x + 'px');
+          glow.style.setProperty('--my', y + 'px');
+        }
+      });
+    });
+
+    module.addEventListener('mouseleave', () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      module.style.transform = '';
+    });
+  });
+
+  /* ===== PARALLAX HERO ===== */
+  const heroArt = document.getElementById('heroArt');
+  const hero = document.getElementById('hero');
+  if (heroArt && hero) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const rect = hero.getBoundingClientRect();
+          const scrolled = window.scrollY;
+          heroArt.style.transform = `translateY(calc(-50% + ${scrolled * 0.15}px)) rotate(${scrolled * 0.05}deg)`;
+          const opacity = Math.max(0, 1 - Math.max(0, -rect.top) / 400);
+          hero.style.opacity = opacity;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      heroArt.style.marginLeft = (x * 20) + 'px';
+      heroArt.style.marginTop = (y * 20) + 'px';
+    });
+    hero.addEventListener('mouseleave', () => {
+      heroArt.style.marginLeft = '';
+      heroArt.style.marginTop = '';
+    });
+  }
+
+  /* ===== CLIQUE NAS AULAS ===== */
+  document.querySelectorAll('.lesson').forEach(lesson => {
+    lesson.addEventListener('click', function() {
+      this.style.transform = 'translateX(4px) scale(0.98)';
+      setTimeout(() => { this.style.transform = ''; }, 200);
+    });
+  });
 </script>
 
 </body>
