@@ -182,7 +182,6 @@
     will-change: transform, opacity;
   }
 
-  /* MÓDULOS QUE ANIMAM NO SCROLL (não os above-the-fold) */
   .module.reveal-on-scroll {
     opacity: 0;
     transform: translateY(60px) scale(0.96) rotateX(8deg);
@@ -197,7 +196,6 @@
       transform 1s var(--ease-apple);
   }
 
-  /* MÓDULOS ABOVE-THE-FOLD (entram no load, sem esperar scroll) */
   .module.reveal-on-load {
     opacity: 0;
     transform: translateY(30px);
@@ -509,6 +507,11 @@
     border-radius: 4px;
   }
 
+  .lesson-tag.new {
+    color: #2D7A4F;
+    background: rgba(45,122,79,0.08);
+  }
+
   .lesson.sensitive .lesson-play {
     background: rgba(181,52,43,0.12);
     border-color: rgba(181,52,43,0.3);
@@ -551,7 +554,6 @@
   }
   .footer-quote strong { font-style: normal; color: #8C6420; }
 
-  /* ===== ANIMAÇÕES ESPECÍFICAS ===== */
   .gear-spin {
     transform-origin: center;
     transform-box: fill-box;
@@ -576,7 +578,6 @@
     95% { transform: scale(0.85); }
   }
 
-  /* Brasil - leve breathing no contorno */
   .brasil-breath {
     transform-origin: center;
     transform-box: fill-box;
@@ -614,13 +615,13 @@
       <line x1="100" y1="20" x2="100" y2="180"/>
     </svg>
     <div class="hero-content">
-      <div class="hero-eyebrow">Area do aluno - 43 aulas - 9 modulos</div>
+      <div class="hero-eyebrow">Area do aluno - 50 aulas - 9 modulos</div>
       <h1 id="heroTitle">Entender o <em>Mundo</em>.</h1>
       <p class="hero-sub">De zero absoluto a uma lente propria pra interpretar historia, politica, economia e sociedade.</p>
     </div>
   </header>
 
-  <!-- MODULO 01 - above the fold (entra no load) -->
+  <!-- MODULO 01 - Fundamentos -->
   <article class="module reveal-on-load">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -670,7 +671,7 @@
     </div>
   </article>
 
-  <!-- MODULO 02 -->
+  <!-- MODULO 02 - Seculo XIX -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -707,58 +708,20 @@
       <div class="module-info">
         <div class="module-meta">Modulo 02 - de 09</div>
         <h2 class="module-title">O mundo no <em>seculo XIX</em></h2>
-        <div class="module-stats"><strong>2 aulas</strong> - A transicao</div>
+        <div class="module-stats"><strong>3 aulas</strong> - A transicao</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson" href="https://gustapauli.github.io/aula14" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 14</div><div class="lesson-title">Era das Ideologias - liberalismo, socialismo, marxismo, nacionalismo</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula15" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 15</div><div class="lesson-title">Imperialismo - a partilha da Africa e Asia</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula14" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 14</div><div class="lesson-title">Era das Ideologias - liberalismo, socialismo, marxismo</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula15" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 15</div><div class="lesson-title">Nacionalismo e unificacoes - Alemanha, Italia, o cimento do seculo XX</div><span class="lesson-tag new">Nova</span></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula16" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 16</div><div class="lesson-title">Imperialismo - a partilha da Africa e Asia</div></div></a>
       </div>
     </div>
   </article>
 
-  <!-- MODULO 03 - BRASIL com silhueta real -->
-  <article class="module reveal-on-scroll">
-    <div class="module-glow"></div>
-    <header class="module-header" onclick="toggleModule(this, event)">
-      <!-- Silhueta do Brasil no fundo -->
-      <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-        <g class="brasil-breath" style="transform-origin: 50px 50px;">
-          <!-- Contorno simplificado do Brasil -->
-          <path d="M38 12 L44 10 L50 13 L56 11 L62 15 L65 22 L72 24 L76 30 L74 36 L80 40 L82 48 L78 54 L82 60 L80 68 L74 74 L68 78 L62 84 L54 88 L46 86 L40 82 L34 76 L28 70 L24 62 L22 54 L20 46 L22 38 L26 30 L30 22 L34 16 Z"/>
-        </g>
-      </svg>
-      <div class="module-badge">
-        <!-- Silhueta do Brasil no badge -->
-        <svg viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
-          <path d="M19 6 L22 5 L25 7 L28 6 L31 8 L33 12 L36 13 L38 17 L37 20 L40 22 L41 26 L39 29 L41 33 L39 37 L36 40 L33 42 L29 44 L25 45 L21 44 L18 41 L15 38 L13 34 L11 30 L10 26 L11 22 L13 18 L15 14 L17 10 Z" opacity="0.15"/>
-          <path d="M19 6 L22 5 L25 7 L28 6 L31 8 L33 12 L36 13 L38 17 L37 20 L40 22 L41 26 L39 29 L41 33 L39 37 L36 40 L33 42 L29 44 L25 45 L21 44 L18 41 L15 38 L13 34 L11 30 L10 26 L11 22 L13 18 L15 14 L17 10 Z" fill="none"/>
-        </svg>
-      </div>
-      <div class="module-info">
-        <div class="module-meta">Modulo 03 - de 09</div>
-        <h2 class="module-title">Brasil - o <em>DNA</em> do nosso pais</h2>
-        <div class="module-stats"><strong>8 aulas</strong> - De onde a gente vem</div>
-      </div>
-      <div class="module-toggle">v</div>
-    </header>
-    <div class="module-body">
-      <div class="lessons">
-        <a class="lesson" href="https://gustapauli.github.io/aula16" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 16</div><div class="lesson-title">Brasil Colonia</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula17" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 17</div><div class="lesson-title">Escravidao - a ferida que nao fechou</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula18" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 18</div><div class="lesson-title">Independencia e Imperio</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula19" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 19</div><div class="lesson-title">Republica Velha</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula20" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 20</div><div class="lesson-title">Era Vargas</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula21" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 21</div><div class="lesson-title">Ditadura militar</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula22" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 22</div><div class="lesson-title">Redemocratizacao e Constituicao de 88</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula23" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 23</div><div class="lesson-title">Brasil hoje - diagnostico estrutural</div></div></a>
-      </div>
-    </div>
-  </article>
-
-  <!-- MODULO 04 -->
+  <!-- MODULO 03 - Seculo XX global (movido pra ca) -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -779,25 +742,62 @@
         </svg>
       </div>
       <div class="module-info">
-        <div class="module-meta">Modulo 04 - de 09</div>
+        <div class="module-meta">Modulo 03 - de 09</div>
         <h2 class="module-title">O mundo no <em>seculo XX</em></h2>
-        <div class="module-stats"><strong>6 aulas</strong> - O seculo que moldou tudo</div>
+        <div class="module-stats"><strong>7 aulas</strong> - O seculo que moldou tudo</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson" href="https://gustapauli.github.io/aula24" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 24</div><div class="lesson-title">Primeira Guerra Mundial</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula25" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 25</div><div class="lesson-title">Entreguerras, crise de 1929 e ascensao dos totalitarismos</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula26" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 26</div><div class="lesson-title">Segunda Guerra Mundial</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula27" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 27</div><div class="lesson-title">Guerra Fria e descolonizacao</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula28" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 28</div><div class="lesson-title">Mundo islamico e Oriente Medio</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula29" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 29</div><div class="lesson-title">China - do seculo da humilhacao a superpotencia</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula17" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 17</div><div class="lesson-title">Primeira Guerra Mundial</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula18" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 18</div><div class="lesson-title">Entreguerras, crise de 1929 e ascensao dos totalitarismos</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula19" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 19</div><div class="lesson-title">Segunda Guerra Mundial</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula20" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 20</div><div class="lesson-title">Guerra Fria e descolonizacao</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula21" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 21</div><div class="lesson-title">Religiao e poder - do Vaticano aos evangelicos</div><span class="lesson-tag new">Nova</span></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula22" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 22</div><div class="lesson-title">Mundo islamico e Oriente Medio</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula23" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 23</div><div class="lesson-title">China e India - dos seculos de humilhacao as superpotencias</div></div></a>
       </div>
     </div>
   </article>
 
-  <!-- MODULO 05 -->
+  <!-- MODULO 04 - BRASIL (movido pra depois) -->
+  <article class="module reveal-on-scroll">
+    <div class="module-glow"></div>
+    <header class="module-header" onclick="toggleModule(this, event)">
+      <svg class="module-bg-art" viewBox="0 0 100 100" fill="none" stroke="#8C6420" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+        <g class="brasil-breath" style="transform-origin: 50px 50px;">
+          <path d="M38 12 L44 10 L50 13 L56 11 L62 15 L65 22 L72 24 L76 30 L74 36 L80 40 L82 48 L78 54 L82 60 L80 68 L74 74 L68 78 L62 84 L54 88 L46 86 L40 82 L34 76 L28 70 L24 62 L22 54 L20 46 L22 38 L26 30 L30 22 L34 16 Z"/>
+        </g>
+      </svg>
+      <div class="module-badge">
+        <svg viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M19 6 L22 5 L25 7 L28 6 L31 8 L33 12 L36 13 L38 17 L37 20 L40 22 L41 26 L39 29 L41 33 L39 37 L36 40 L33 42 L29 44 L25 45 L21 44 L18 41 L15 38 L13 34 L11 30 L10 26 L11 22 L13 18 L15 14 L17 10 Z" opacity="0.15"/>
+          <path d="M19 6 L22 5 L25 7 L28 6 L31 8 L33 12 L36 13 L38 17 L37 20 L40 22 L41 26 L39 29 L41 33 L39 37 L36 40 L33 42 L29 44 L25 45 L21 44 L18 41 L15 38 L13 34 L11 30 L10 26 L11 22 L13 18 L15 14 L17 10 Z" fill="none"/>
+        </svg>
+      </div>
+      <div class="module-info">
+        <div class="module-meta">Modulo 04 - de 09</div>
+        <h2 class="module-title">Brasil - o <em>DNA</em> do nosso pais</h2>
+        <div class="module-stats"><strong>8 aulas</strong> - De onde a gente vem</div>
+      </div>
+      <div class="module-toggle">v</div>
+    </header>
+    <div class="module-body">
+      <div class="lessons">
+        <a class="lesson" href="https://gustapauli.github.io/aula24" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 24</div><div class="lesson-title">Brasil Colonia</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula25" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 25</div><div class="lesson-title">Escravidao - ferida brasileira e sistema global</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula26" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 26</div><div class="lesson-title">Independencia e Imperio</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula27" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 27</div><div class="lesson-title">Republica Velha</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula28" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 28</div><div class="lesson-title">Era Vargas</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula29" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 29</div><div class="lesson-title">Ditadura militar</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula30" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 30</div><div class="lesson-title">Redemocratizacao e Constituicao de 88</div></div></a>
+        <a class="lesson sensitive" href="https://gustapauli.github.io/aula31" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 31</div><div class="lesson-title">Brasil hoje - diagnostico estrutural</div><span class="lesson-tag">Sensivel</span></div></a>
+      </div>
+    </div>
+  </article>
+
+  <!-- MODULO 05 - Sistemas economicos -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -814,21 +814,22 @@
       <div class="module-info">
         <div class="module-meta">Modulo 05 - de 09</div>
         <h2 class="module-title">Os <em>sistemas economicos</em></h2>
-        <div class="module-stats"><strong>4 aulas</strong> - Como o dinheiro organiza o mundo</div>
+        <div class="module-stats"><strong>5 aulas</strong> - Como o dinheiro organiza o mundo</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson" href="https://gustapauli.github.io/aula30" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 30</div><div class="lesson-title">Capitalismo - como nasceu, como funciona, suas contradicoes</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula31" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 31</div><div class="lesson-title">Socialismo e Comunismo - Marx, URSS, China, Cuba</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula32" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 32</div><div class="lesson-title">Hibridos do mundo real - social-democracia, economia mista, modelos asiaticos</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula33" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 33</div><div class="lesson-title">Juros, inflacao e dinheiro no dia a dia</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula32" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 32</div><div class="lesson-title">Capitalismo - como nasceu, como funciona, suas contradicoes</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula33" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 33</div><div class="lesson-title">Socialismo e Comunismo - Marx, URSS, China, Cuba</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula34" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 34</div><div class="lesson-title">Hibridos do mundo real - social-democracia, economia mista, modelos asiaticos</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula35" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 35</div><div class="lesson-title">Juros, inflacao e dinheiro no dia a dia</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula36" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 36</div><div class="lesson-title">Do macro pro seu bolso - impostos, Selic, divida, investir</div><span class="lesson-tag new">Nova</span></div></a>
       </div>
     </div>
   </article>
 
-  <!-- MODULO 06 -->
+  <!-- MODULO 06 - Politica de verdade -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -855,21 +856,22 @@
       <div class="module-info">
         <div class="module-meta">Modulo 06 - de 09</div>
         <h2 class="module-title">Politica <em>de verdade</em></h2>
-        <div class="module-stats"><strong>4 aulas</strong> - O jogo por dentro</div>
+        <div class="module-stats"><strong>5 aulas</strong> - O jogo por dentro</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson" href="https://gustapauli.github.io/aula34" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 34</div><div class="lesson-title">Direita e esquerda - o que e, de verdade</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula35" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 35</div><div class="lesson-title">Os 3 poderes - como funcionam (e como falham)</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula36" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 36</div><div class="lesson-title">Sistema eleitoral - quem se beneficia das regras</div></div></a>
-        <a class="lesson" href="https://gustapauli.github.io/aula37" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 37</div><div class="lesson-title">Midia, algoritmo e formacao de opiniao</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula37" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 37</div><div class="lesson-title">Direita e esquerda - o que e, de verdade</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula38" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 38</div><div class="lesson-title">Os 3 poderes - como funcionam (e como falham)</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula39" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 39</div><div class="lesson-title">O Estado no dia a dia - leis, PEC, MP, STF, CPI</div><span class="lesson-tag new">Nova</span></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula40" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 40</div><div class="lesson-title">Sistema eleitoral - quem se beneficia das regras</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula41" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 41</div><div class="lesson-title">Midia, algoritmo e formacao de opiniao</div></div></a>
       </div>
     </div>
   </article>
 
-  <!-- MODULO 07 -->
+  <!-- MODULO 07 - Manual cidadao -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -889,24 +891,32 @@
       <div class="module-info">
         <div class="module-meta">Modulo 07 - de 09</div>
         <h2 class="module-title">Manual pratico do <em>cidadao brasileiro</em></h2>
-        <div class="module-stats"><strong>2 aulas</strong> - Aplicacao direta</div>
+        <div class="module-stats"><strong>3 aulas</strong> - Aplicacao direta</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson sensitive" href="https://gustapauli.github.io/aula38" target="_blank">
+        <a class="lesson sensitive" href="https://gustapauli.github.io/aula42" target="_blank">
           <div class="lesson-play"></div>
           <div class="lesson-content">
-            <div class="lesson-num">Aula 38</div>
-            <div class="lesson-title">Escandalos da politica brasileira recente - Mensalao, Lava Jato, Dilma, Temer, Centrao, Banco Master</div>
+            <div class="lesson-num">Aula 42</div>
+            <div class="lesson-title">Escandalos parte 1 - Mensalao, Lava Jato, impeachment Dilma</div>
             <span class="lesson-tag">Sensivel</span>
           </div>
         </a>
-        <a class="lesson sensitive" href="https://gustapauli.github.io/aula39" target="_blank">
+        <a class="lesson sensitive" href="https://gustapauli.github.io/aula43" target="_blank">
           <div class="lesson-play"></div>
           <div class="lesson-content">
-            <div class="lesson-num">Aula 39</div>
+            <div class="lesson-num">Aula 43</div>
+            <div class="lesson-title">Escandalos parte 2 - Temer, rachadinha, joias, Centrao, Banco Master</div>
+            <span class="lesson-tag">Sensivel</span>
+          </div>
+        </a>
+        <a class="lesson sensitive" href="https://gustapauli.github.io/aula44" target="_blank">
+          <div class="lesson-play"></div>
+          <div class="lesson-content">
+            <div class="lesson-num">Aula 44</div>
             <div class="lesson-title">Manual para votar em 2026 - pre-candidatos, propostas, decisao por fato</div>
             <span class="lesson-tag">Sensivel</span>
           </div>
@@ -915,7 +925,7 @@
     </div>
   </article>
 
-  <!-- MODULO 08 -->
+  <!-- MODULO 08 - Sociedade e futuro -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -938,26 +948,27 @@
       <div class="module-info">
         <div class="module-meta">Modulo 08 - de 09</div>
         <h2 class="module-title">Sociedade e <em>futuro</em></h2>
-        <div class="module-stats"><strong>2 aulas</strong> - O que vem agora</div>
+        <div class="module-stats"><strong>3 aulas</strong> - O que vem agora</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson sensitive" href="https://gustapauli.github.io/aula40" target="_blank">
+        <a class="lesson sensitive" href="https://gustapauli.github.io/aula45" target="_blank">
           <div class="lesson-play"></div>
           <div class="lesson-content">
-            <div class="lesson-num">Aula 40</div>
+            <div class="lesson-num">Aula 45</div>
             <div class="lesson-title">Geopolitica hoje - EUA, China, Russia, BRICS, multipolaridade</div>
             <span class="lesson-tag">Sensivel</span>
           </div>
         </a>
-        <a class="lesson" href="https://gustapauli.github.io/aula41" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 41</div><div class="lesson-title">Estruturas invisiveis (classe, raca, genero) + tecnologia, IA e o novo poder</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula46" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 46</div><div class="lesson-title">Estruturas invisiveis - classe, raca, genero sem militancia</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula47" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 47</div><div class="lesson-title">Tecnologia, IA e o novo poder</div><span class="lesson-tag new">Nova</span></div></a>
       </div>
     </div>
   </article>
 
-  <!-- MODULO 09 -->
+  <!-- MODULO 09 - Lente critica -->
   <article class="module reveal-on-scroll">
     <div class="module-glow"></div>
     <header class="module-header" onclick="toggleModule(this, event)">
@@ -980,21 +991,22 @@
       <div class="module-info">
         <div class="module-meta">Modulo 09 - de 09</div>
         <h2 class="module-title">Lente critica e <em>fechamento</em></h2>
-        <div class="module-stats"><strong>2 aulas</strong> - Onde tudo se junta</div>
+        <div class="module-stats"><strong>3 aulas</strong> - Onde tudo se junta</div>
       </div>
       <div class="module-toggle">v</div>
     </header>
     <div class="module-body">
       <div class="lessons">
-        <a class="lesson sensitive" href="https://gustapauli.github.io/aula42" target="_blank">
+        <a class="lesson" href="https://gustapauli.github.io/aula48" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 48</div><div class="lesson-title">Metodo cientifico e ceticismo - como saber se e verdade</div><span class="lesson-tag new">Nova</span></div></a>
+        <a class="lesson sensitive" href="https://gustapauli.github.io/aula49" target="_blank">
           <div class="lesson-play"></div>
           <div class="lesson-content">
-            <div class="lesson-num">Aula 42</div>
+            <div class="lesson-num">Aula 49</div>
             <div class="lesson-title">Como a historia e contada - quem escreve, o que some, por que importa</div>
             <span class="lesson-tag">Sensivel</span>
           </div>
         </a>
-        <a class="lesson" href="https://gustapauli.github.io/aula43" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 43</div><div class="lesson-title">Aula final - o que voce pode fazer e a estrutura mental que voce agora tem</div></div></a>
+        <a class="lesson" href="https://gustapauli.github.io/aula50" target="_blank"><div class="lesson-play"></div><div class="lesson-content"><div class="lesson-num">Aula 50</div><div class="lesson-title">Aula final - sintese e o que fazer com tudo isso</div></div></a>
       </div>
     </div>
   </article>
@@ -1016,7 +1028,6 @@
 </div>
 
 <script>
-  /* ===== TOGGLE COM RIPPLE ===== */
   function toggleModule(header, event) {
     if (event) {
       const rect = header.getBoundingClientRect();
@@ -1032,7 +1043,6 @@
     header.parentElement.classList.toggle('collapsed');
   }
 
-  /* ===== HERO TITLE - REVEAL POR PALAVRA ===== */
   (function splitHeroTitle() {
     const h1 = document.getElementById('heroTitle');
     if (!h1) return;
@@ -1077,7 +1087,6 @@
     });
   })();
 
-  /* ===== INTERSECTION OBSERVER ===== */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1091,7 +1100,6 @@
   const footer = document.getElementById('footer');
   if (footer) io.observe(footer);
 
-  /* ===== TILT 3D + GLOW ===== */
   document.querySelectorAll('.module').forEach(module => {
     const glow = module.querySelector('.module-glow');
     let rafId = null;
@@ -1121,7 +1129,6 @@
     });
   });
 
-  /* ===== PARALLAX HERO ===== */
   const heroArt = document.getElementById('heroArt');
   const hero = document.getElementById('hero');
   if (heroArt && hero) {
@@ -1153,7 +1160,6 @@
     });
   }
 
-  /* ===== CLIQUE NAS AULAS ===== */
   document.querySelectorAll('.lesson').forEach(lesson => {
     lesson.addEventListener('click', function() {
       this.style.transform = 'translateX(4px) scale(0.98)';
